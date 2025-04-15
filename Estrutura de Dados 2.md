@@ -85,3 +85,22 @@ Logo a complexidade total desse trecho é
 3n³ + 4n² + 4n + 2
 
 Quando tratamos o big O(n), todas as constantes são tratadas como nula (1), então fica ***n x n x n = n³***
+# modelos de busca e ordenação
+
+# modelos de busca
+
+vetor desordenado: busca linear que tem baixa eficiência
+
+vetor ordenado: busca linear, busca ordenada e busca binaria (superior a ordenada) 
+
+### busca linear
+
+melhor caso: testara apenas 1 elemento
+pior caso: testara n elementos
+### busca ordenada
+
+sendo igual a busca linear, se difere apenas que para cada interação é feita uma verificação se o elemento verificado no vetor é maior do que o elemento procurado, pois como o vetor é ordenado significa que tal elemento não existe, então o mesmo é encerrado
+
+### Busca Binaria 
+
+nesse modelo a cada repetição ele verifica se o meio do vetor é maior ou menor do que o elemento a ser encontrado, caso seja igual o programa é encerrado, mas caso seja o menor o vetor ira procurar na metade esquerda do código, caso o contrario (for maior) ira procurar pela par te direita
