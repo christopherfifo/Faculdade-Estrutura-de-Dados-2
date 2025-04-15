@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1744745769 source:c:\users\user\desktop\programing\faculdade-estrutura-de-dados-2\aula 3\hash\hashtable.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"hashTable.h"
+
+1744746735 c:\users\user\desktop\programing\faculdade-estrutura-de-dados-2\aula 3\hash\hashtable.h
+
+1744746294 source:c:\users\user\desktop\programing\faculdade-estrutura-de-dados-2\aula 3\hash\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"hashTable.h"
+

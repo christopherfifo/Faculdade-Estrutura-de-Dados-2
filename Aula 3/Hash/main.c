@@ -1,10 +1,9 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "hashTable.h"
-#include <ctype.h>
-#include <locale.h>
 
 int main() {
-
-    setlocale(LC_ALL, "C");
     int tamanho;
     printf("TAMANHO DA TABELA HASH (recomendado numero primo): ");
     scanf("%d", &tamanho);
@@ -40,10 +39,11 @@ int main() {
                 break;
 
             default:
-                printf("\nopcao invalida!\n");
+                printf("\nOpcao invalida!\n");
         }
     } while (modo != 0);
 
     liberaHash(ha);
     return 0;
 }
+
