@@ -62,6 +62,10 @@ int insereHash_semColisao(Hash* ha, struct aluno al) {
     int chave = al.matricula;
     int pos = chaveDivisao(chave, ha->TABLE_SIZE);
 
+    if (ha->itens[pos] != NULL && ha->itens[pos]->matricula == al.matricula) {
+        return -1;  
+    }
+
     struct aluno* novo = (struct aluno*)malloc(sizeof(struct aluno));
     if (novo == NULL) {
         return 0;
@@ -199,10 +203,14 @@ void menuOperacoes(Hash* ha, int comTratamentoColisao) {
                     resultado = insereHash_semColisao(ha, al);
                 }
 
-                if (resultado) {
+                if (resultado == 1) {
                     printf("\nAluno inserido com sucesso!\n");
-                } else {
-                    printf("\nErro ao inserir aluno! Tabela cheia ou matricula duplicada.\n");
+                } 
+                else if (resultado == -1) {
+                    printf("\nERRO: Matricula %d ja existe! Tente novamente.\n", al.matricula);
+                }
+                else {
+                    printf("\nErro ao inserir aluno! Tabela cheia.\n");
                 }
                 break;
             }
