@@ -1,12 +1,12 @@
 # depslib dependency file v1.0
-1747160185 source:c:\users\user\desktop\programing\faculdade-estrutura-de-dados-2\arvore binaria\arvorebinaria\arvorebinaria.c
+1747161078 source:c:\users\user\desktop\programing\faculdade-estrutura-de-dados-2\arvore binaria\arvorebinaria\arvorebinaria.c
 	<stdio.h>
 	<stdlib.h>
 	"arvoreBinaria.h"
 
-1747160185 c:\users\user\desktop\programing\faculdade-estrutura-de-dados-2\arvore binaria\arvorebinaria\arvorebinaria.h
+1747161069 c:\users\user\desktop\programing\faculdade-estrutura-de-dados-2\arvore binaria\arvorebinaria\arvorebinaria.h
 
-1747160185 source:c:\users\user\desktop\programing\faculdade-estrutura-de-dados-2\arvore binaria\arvorebinaria\main.c
+1747160993 source:c:\users\user\desktop\programing\faculdade-estrutura-de-dados-2\arvore binaria\arvorebinaria\main.c
 	<stdio.h>
 	<stdlib.h>
 	"arvoreBinaria.h"

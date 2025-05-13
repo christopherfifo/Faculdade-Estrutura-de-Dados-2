@@ -1,5 +1,3 @@
-//Arquivo arvoreBinaria.h
-
 typedef struct NO *ArvBin;
 
 ArvBin *cria_arvBin();

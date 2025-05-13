@@ -1,5 +1,3 @@
-//Arquivo arvoreBinaria.c
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "arvoreBinaria.h"
