@@ -1,8 +1,8 @@
 # depslib dependency file v1.0
-1747176181 source:c:\users\user\desktop\programing\faculdade-estrutura-de-dados-2\aula 5\arvoreavl\arvoreavl.c
+1747589686 source:c:\users\user\desktop\programing\faculdade-estrutura-de-dados-2\aula 5\arvoreavl\arvoreavl.c
 	<stdio.h>
 	<stdlib.h>
 	"arvoreAVL.h"
 
-1747176092 c:\users\user\desktop\programing\faculdade-estrutura-de-dados-2\aula 5\arvoreavl\arvoreavl.h
+1747588019 c:\users\user\desktop\programing\faculdade-estrutura-de-dados-2\aula 5\arvoreavl\arvoreavl.h
 

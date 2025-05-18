@@ -8,7 +8,6 @@ void exibirBusca(arvAVL *raiz, int valor);
 
 int main() {
     int x;
-    int valor;
     arvAVL *raiz = cria_arvAVL();
 
     printf("\n");
@@ -36,13 +35,10 @@ int main() {
 
     exibirVisita("pre-Ordem", preOrdem_arvAVL, raiz);
     exibirVisita("em-Ordem", emOrdem_arvAVL, raiz);
-    exibirVisita("pos-Ordem", posOderm_arvAVL, raiz);
+    exibirVisita("pos-Ordem", posOderm_arvAVL, raiz);;
 
-    printf("\tDigite o valor que deseja remover: ");
-    scanf("%d", &valor);
+    x = remove_arvAVL(raiz, 170);
 
-    x = remove_arvAVL(raiz, valor);
-    
     if (x) {
         printf("\tElemento removido com sucesso.\n");
     } else {
