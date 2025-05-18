@@ -8,6 +8,7 @@ void exibirBusca(arvAVL *raiz, int valor);
 
 int main() {
     int x;
+    int valor;
     arvAVL *raiz = cria_arvAVL();
 
     printf("\n");
@@ -15,11 +16,11 @@ int main() {
     printf("\t||       Arvore AVL de Busca    ||\n");
     printf("\t=====================================\n\n");
 
-    // int elementos[] = {150, 110, 100, 130, 120, 140, 160};
-    // for (int i = 0; i < 7; i++) {
-    //     x = insere_arvAVL(raiz, elementos[i]);
-    //     exibirMensagemInsercao(x);
-    // }
+    int elementos[] = {160, 150, 100, 110, 130, 140, 120, 170, 180, 190, 200, 200};
+    for (int i = 0; i < 12; i++) {
+        x = insere_arvAVL(raiz, elementos[i]);
+        exibirMensagemInsercao(x);
+    }
 
     printf("\n");
 
@@ -37,7 +38,17 @@ int main() {
     exibirVisita("em-Ordem", emOrdem_arvAVL, raiz);
     exibirVisita("pos-Ordem", posOderm_arvAVL, raiz);
 
-    // x = remove_arvAVL(raiz, 100);
+    printf("\tDigite o valor que deseja remover: ");
+    scanf("%d", &valor);
+
+    x = remove_arvAVL(raiz, valor);
+    
+    if (x) {
+        printf("\tElemento removido com sucesso.\n");
+    } else {
+        printf("\tElemento nao encontrado na arvore.\n");
+    }
+
     exibirVisita("pos-Ordem apos a remocao", posOderm_arvAVL, raiz);
 
     exibirBusca(raiz, 140);
