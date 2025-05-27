@@ -242,7 +242,7 @@ struct NO *insereNO(struct NO *H, int valor, int *resp){
         return novo;
     }
 
-    if(valor < H->info){
+    if(valor == H->info){
         *resp = 0;
     } else {
         if(valor < H->info){
@@ -295,7 +295,7 @@ struct NO *removeNO(struct NO *H, int valor){
     return balancear(H);
 }
 
-struct NO *procuraMenor(struct NO *H){
+struct NO *removeMenor(struct NO *H){
     if(H->esq == NULL){
         free(H);
         return NULL;
