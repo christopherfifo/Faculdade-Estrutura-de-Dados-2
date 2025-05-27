@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1747782894 source:c:\users\user\desktop\programing\faculdade-estrutura-de-dados-2\aula 6\rubronegra\main.c
+	<stdio.h>
+	<stdlib.h>
+	"rubroNegra.h"
+
+1748381530 c:\users\user\desktop\programing\faculdade-estrutura-de-dados-2\aula 6\rubronegra\rubronegra.h
+
