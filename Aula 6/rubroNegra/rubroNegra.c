@@ -47,41 +47,13 @@ int altura_arvoreLLRB(arvoreLLRB *raiz){
 }
 
 int insere_arvoreLLRB(arvoreLLRB *raiz, int valor){
-    if(raiz == NULL){
-        return 0;
+    int resp;
+
+    *raiz =  insereNO(*raiz, valor, &resp);
+    if(*raiz != NULL){
+        (*raiz)->cor = BLACK; // A raiz sempre é preta
     }
-    struct NO *novo;
-    novo = (struct NO*) malloc(sizeof(struct NO));
-    if(novo == NULL){
-        return 0;
-    }
-    novo->info = valor;
-    novo->dir = NULL;
-    novo->esq = NULL;
-    if(*raiz == NULL){
-        *raiz = novo;
-    }else{
-        struct NO *atual = *raiz;
-        struct NO *ant = NULL;
-        while(atual != NULL){
-            ant = atual;
-            if(valor == atual->info){
-                free(novo);
-                return 0;
-            }
-            if(valor > atual->info){
-                atual = atual->dir;
-            }else{
-                atual = atual->esq;
-            }
-        }
-        if(valor > ant->info){
-            ant->dir = novo;
-        }else{
-            ant->esq = novo;
-        }
-    }
-    return 1;
+    return resp;
 }
 
 int totalNO_arvoreLLRB(arvoreLLRB *raiz){
@@ -120,27 +92,6 @@ void emOrdem_arvoreLLRB(arvoreLLRB *raiz){
     }
 }
 
-struct NO *remove_atual(struct NO *atual){
-    struct NO *no1, *no2;
-    if(atual->esq == NULL){
-        no2 = atual->dir;
-        free(atual);
-        return no2;
-    }
-    no1 = atual;
-    no2 = atual->esq;
-    while(no2->dir != NULL){
-        no1 = no2;
-        no2 = no2->dir;
-    }
-    if(no1 != atual){
-        no1->dir = no2->esq;
-        no2->esq = atual->esq;
-    }
-    no2->dir = atual->dir;
-    free(atual);
-    return no2;
-}
 
 
 void posOderm_arvoreLLRB(arvoreLLRB *raiz){
@@ -156,31 +107,18 @@ void posOderm_arvoreLLRB(arvoreLLRB *raiz){
 
 
 int remove_arvoreLLRB(arvoreLLRB *raiz, int valor){
-    if(raiz == NULL){
-        return 0;
-    }
-    struct NO *ant = NULL;
-    struct NO *atual = *raiz;
-    while(atual != NULL){
-        if(valor == atual->info){
-            if(atual == *raiz){
-                *raiz = remove_atual(atual);
-        }else{
-            if(ant->dir == atual){
-                ant->dir = remove_atual(atual);
-            }else{
-                ant->esq = remove_atual(atual);
-            }
+    if(consulta_arvoreLLRB(raiz, valor)){
+        struct NO *H = *raiz;
+
+        *raiz = removeNO(H, valor);
+        if(*raiz != NULL){
+            (*raiz)->cor = BLACK; // A raiz sempre é preta
         }
-        return 1;
+
+        return 1; // Remoção bem-sucedida
+    } else {
+        return 0; // Valor não encontrado
     }
-    ant = atual;
-    if(valor > atual->info){
-        atual = atual->dir;
-    }else{
-        atual = atual->esq;
-    }
-}
 }
 
 
@@ -287,4 +225,99 @@ struct NO *balancear(struct NO *H){
         trocaCor(H);
     }
     return H;
+}
+
+struct NO *insereNO(struct NO *H, int valor, int *resp){
+    if(H == NULL){
+        struct NO *novo = (struct NO*) malloc(sizeof(struct NO));
+        if(novo == NULL){
+            *resp = 0; // Falha ao alocar memória
+            return NULL;
+        }
+        novo->info = valor;
+        novo->cor = RED; // Novo nó é vermelho
+        novo->dir = NULL;
+        novo->esq = NULL;
+        *resp = 1; // Inserção bem-sucedida
+        return novo;
+    }
+
+    if(valor < H->info){
+        *resp = 0;
+    } else {
+        if(valor < H->info){
+            H->esq = insereNO(H->esq, valor, resp);
+        } else {
+            H->dir = insereNO(H->dir, valor, resp);
+        }
+    }
+
+    if(cor(H->dir) == RED && cor(H->esq) == BLACK){
+        H = rotacionaEsquerda(H);
+    }
+
+    if(cor(H->esq) == RED && cor(H->esq->esq) == RED){
+        H = rotacionaDireita(H);
+    }
+
+    if(cor(H->esq) == RED && cor(H->dir) == RED){
+        trocaCor(H);
+    }
+
+    return H;
+}
+
+struct NO *removeNO(struct NO *H, int valor){
+    if(valor < H->info){
+        if(cor(H->esq) == BLACK && cor(H->esq->esq) == BLACK){
+            H = move2EsqRed(H);
+        }
+        H->esq = removeNO(H->esq, valor);
+    } else {
+        if(cor(H->esq) == RED){
+            H = rotacionaDireita(H);
+        }
+        if(valor == H->info && (H->dir == NULL)){
+            free(H);
+            return NULL;
+        }
+        if(cor(H->dir) == BLACK && cor(H->dir->esq) == BLACK){
+            H = move2DirRed(H);
+        }
+        if(valor == H->info){
+            struct NO *x = procuraMenor(H->dir);
+            H->info = x->info;
+            H->dir = removeMenor(H->dir);
+        } else {
+            H->dir = removeNO(H->dir, valor);
+        }
+    }
+    return balancear(H);
+}
+
+struct NO *procuraMenor(struct NO *H){
+    if(H->esq == NULL){
+        free(H);
+        return NULL;
+    } 
+
+    if(cor(H->esq) == BLACK && cor(H->esq->esq) == BLACK){
+        H = move2EsqRed(H);
+    }
+
+    H->esq = procuraMenor(H->esq);
+
+    return balancear(H);
+}
+
+struct NO *procuraMenor(struct NO *atual){
+    struct NO *no1 = atual;
+    
+    struct NO *no2 = atual->esq;
+    while(no2 != NULL){
+        no1 = no2;
+        no2 = no2->esq;
+    }
+
+    return no1;
 }
